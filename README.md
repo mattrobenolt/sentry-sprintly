@@ -5,3 +5,5 @@ A plugin for [Sentry](https://www.getsentry.com/) that creates [Sprint.ly](https
 `$ pip install sentry-sprintly`
 
 Sentry will automagically decect that it has been installed.
+
+![](http://i.imgur.com/xkUsi.png)
