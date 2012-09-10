@@ -1,0 +1,3 @@
+include setup.py README.md MANIFEST.in LICENSE
+recursive-include sentry_sprintly/templates *
+global-exclude *~
