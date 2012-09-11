@@ -17,7 +17,7 @@ install_requires = [
 
 setup(
     name='sentry-sprintly',
-    version='0.1.2',
+    version='0.1.3',
     author='Matt Robenolt',
     author_email='matt@ydekproductons.com',
     url='http://github.com/mattrobenolt/sentry-sprintly',
