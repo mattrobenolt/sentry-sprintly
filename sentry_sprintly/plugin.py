@@ -55,7 +55,7 @@ class SprintlyPlugin(issue.IssuePlugin):
     new_issue_form = SprintlyNewIssueForm
 
     def is_configured(self, request, project, **kwargs):
-        return all([self.get_option(o, project) for o in ('email', 'api_key')])
+        return all([self.get_option(o, project) for o in ('email', 'api_key', 'product_id')])
 
     def get_new_issue_title(self, **kwargs):
         return 'Create Sprint.ly Defect'
