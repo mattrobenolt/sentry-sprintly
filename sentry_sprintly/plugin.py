@@ -46,6 +46,7 @@ class SprintlyPlugin(issue.IssuePlugin):
     author = 'Matt Robenolt'
     author_url = 'https://github.com/mattrobenolt'
     version = sentry_sprintly.VERSION
+    description = 'Turn Sentry exceptions into new Sprint.ly defects.'
     resource_links = (
         ('Bug Tracker', 'http://github.com/mattrobenolt/sentry-sprintly/issues'),
         ('Source', 'http://github.com/mattrobenolt/sentry-sprintly'),
