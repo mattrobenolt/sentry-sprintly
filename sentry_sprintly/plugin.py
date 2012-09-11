@@ -44,8 +44,12 @@ class SprintlyNewIssueForm(issue.NewIssueForm):
 
 class SprintlyPlugin(issue.IssuePlugin):
     author = 'Matt Robenolt'
-    author_url = 'https://github.com/mattrobenolt/sentry-sprintly'
+    author_url = 'https://github.com/mattrobenolt'
     version = sentry_sprintly.VERSION
+    resource_links = (
+        ('Bug Tracker', 'http://github.com/mattrobenolt/sentry-sprintly/issues'),
+        ('Source', 'http://github.com/mattrobenolt/sentry-sprintly'),
+    )
 
     slug = 'sprintly'
     title = _('Sprint.ly')
