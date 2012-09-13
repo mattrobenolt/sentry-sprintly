@@ -70,7 +70,7 @@ class SprintlyPlugin(issue.IssuePlugin):
         api_key = self.get_option('api_key', group.project)
         product_id = self.get_option('product_id', group.project)
 
-        url = 'https://sprint.ly/api/products/{}/items.json'.format(product_id)
+        url = 'https://sprint.ly/api/products/{0}/items.json'.format(product_id)
 
         data = urllib.urlencode({
             'type': 'defect',
@@ -82,19 +82,19 @@ class SprintlyPlugin(issue.IssuePlugin):
         })
 
         # Authorization base64
-        auth = '{}:{}'.format(email, api_key)
+        auth = '{0}:{1}'.format(email, api_key)
         auth = base64.b64encode(auth)
 
         req = urllib2.Request(url)
-        req.add_header('User-Agent', 'sentry-sprintly/{}'.format(self.version))
-        req.add_header('Authorization', 'Basic {}'.format(auth))
+        req.add_header('User-Agent', 'sentry-sprintly/{0}'.format(self.version))
+        req.add_header('Authorization', 'Basic {0}'.format(auth))
 
         try:
             resp = urllib2.urlopen(req, data)
         except Exception as e:
             if isinstance(e, urllib2.HTTPError):
                 if e.code == 404:
-                    raise forms.ValidationError(_('Sprint.ly product not found: {}'.format(product_id)))
+                    raise forms.ValidationError(_('Sprint.ly product not found: {0}'.format(product_id)))
 
                 msg = e.read()
                 try:
@@ -104,20 +104,20 @@ class SprintlyPlugin(issue.IssuePlugin):
                     pass
             else:
                 msg = unicode(e)
-            raise forms.ValidationError(_('Error from Sprint.ly: {}'.format(msg)))
+            raise forms.ValidationError(_('Error from Sprint.ly: {0}'.format(msg)))
 
         try:
             data = json.load(resp)
         except Exception as e:
-            raise forms.ValidationError(_('Error decoding response from Sprint.ly: {}'.format(e)))
+            raise forms.ValidationError(_('Error decoding response from Sprint.ly: {0}'.format(e)))
 
         return data['number']
 
 
     def get_issue_label(self, group, issue_id, **kwargs):
-        return 'Sprint.ly #{}'.format(issue_id)
+        return 'Sprint.ly #{0}'.format(issue_id)
 
     def get_issue_url(self, group, issue_id, **kwargs):
         product_id = self.get_option('product_id', group.project)
 
-        return 'https://sprint.ly/product/{}/item/{}'.format(product_id, issue_id)
+        return 'https://sprint.ly/product/{0}/item/{1}'.format(product_id, issue_id)
