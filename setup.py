@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """
 sentry-sprintly
-==============
+===============
 
 An extension for Sentry which integrates with Sprint.ly.
 
