@@ -9,6 +9,7 @@ sentry_sprintly.plugin
 from django import forms
 from django.utils import simplejson as json
 from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import force_str
 from sentry.plugins.bases import issue
 
 import sentry_sprintly
@@ -74,11 +75,11 @@ class SprintlyPlugin(issue.IssuePlugin):
 
         data = urllib.urlencode({
             'type': 'defect',
-            'title': form_data['title'],
-            'description': form_data['description'],
+            'title': force_str(form_data['title']),
+            'description': force_str(form_data['description']),
             'status': 'backlog',
-            'tags': form_data['tags'],
-            'score': form_data['score'],
+            'tags': force_str(form_data['tags']),
+            'score': force_str(form_data['score']),
         })
 
         # Authorization base64
@@ -112,7 +113,6 @@ class SprintlyPlugin(issue.IssuePlugin):
             raise forms.ValidationError(_('Error decoding response from Sprint.ly: {0}'.format(e)))
 
         return data['number']
-
 
     def get_issue_label(self, group, issue_id, **kwargs):
         return 'Sprint.ly #{0}'.format(issue_id)
